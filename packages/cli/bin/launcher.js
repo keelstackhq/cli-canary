@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// canary: one-line change to measure CI (npm-cli only)
 // @ts-check
 // Starts the native binary from the matching platform package; nothing is installed or fetched here.
 import { spawnSync } from "node:child_process";
