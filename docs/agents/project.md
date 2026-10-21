@@ -16,19 +16,22 @@ are closed after green and never merged, so `main` stays equal to the rendered t
 ## Steps
 
 - [x] 3 Render the combo, local `pnpm run ci` green, commit once (not pushed by the agent)
-- [ ] 3b Push `main`; record the cold run; re-run the `main` workflow once (no-op) to warm
+- [x] 3b Push `main`; record the cold run; re-run the `main` workflow once (no-op) to warm
       rust-cache and the turbo cache
-- [ ] 4 Three PRs, one-line comment changes, closed after green, never merged:
+- [x] 4 Three PRs, one-line comment changes, closed after green, never merged:
       (1) `crates/cli/src/cli.rs` (worst case), (2) `packages/cli/bin/launcher.js`, (3) a docs file;
       then `node scripts/ci-timing.mjs --repo keelstackhq/cli-canary --budget 45 --limit 20`
       and record n / p50 / p90 and each PR's warm `ci` job seconds
-- [ ] 5 Decide: PR (2) <= 45 s and PR (3) <= 15 s -> done; over budget -> numbers and first lever
+- [x] 5 Decide: PR (2) <= 45 s and PR (3) <= 15 s -> done; over budget -> numbers and first lever
       under Blocked in hull `docs/PROGRESS.md`
-- [ ] 6 Record in hull: `docs: record cli combo CI timing against the 45 s budget`
+- [x] 6 Record in hull: `docs: record cli combo CI timing against the 45 s budget`
 
 ## Progress
 
 - 2026-10-21 · 3 · keelstackhq/hull@7c7eadf · render ok; `pnpm run ci` exit 0, 15/15 tasks, 0 cached, cold, 72 s (container timing, not runner evidence); `agents-index --check` exit 0
+- 2026-10-21 · 3b · https://github.com/keelstackhq/cli-canary/actions/runs/39567805471 · cold `main` run: ci 98 s, ci-ok 3 s; warm re-run (attempt 2, all turbo tasks cached): ci 44 s
+- 2026-10-21 · 4 · https://github.com/keelstackhq/cli-canary/pull/1 (crate), /pull/2 (npm launcher), /pull/3 (docs) · warm `ci` job: crate 42 s (turbo 4.5 s, rust-cache warm), npm launcher 26 s (Rust steps skipped), docs-only 9 s (early exit); ci-ok 3–4 s; all closed, not merged
+- 2026-10-21 · 5 · n=3 p50=26 s p90≈42 s (from the job timestamps; `ci-timing.mjs` needs an authenticated `gh`) · within budget: npm launcher 26 s ≤ 45 s, docs-only 9 s ≤ 15 s; the crate worst case is also under 45 s
 
 ## Blocked
 
