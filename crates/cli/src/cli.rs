@@ -1,3 +1,4 @@
+// canary: one-line change to measure CI (crate + npm-cli affected)
 //! Command line definition (clap derive). The binary name and version come from Cargo.toml.
 
 use std::path::PathBuf;
