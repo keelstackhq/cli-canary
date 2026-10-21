@@ -1,0 +1,13 @@
+{
+  "name": "@keelstackhq/cli-crate",
+  "version": "0.0.0",
+  "private": true,
+  "hull": { "release": "rust-cli" },
+  "scripts": {
+    "build": "cargo build -p cli --locked",
+    "lint": "cargo clippy -p cli --all-targets --locked -- -D warnings && cargo deny --manifest-path Cargo.toml --config deny.toml check bans licenses sources",
+    "format:check": "cargo fmt -p cli --check",
+    "typecheck": "cargo check -p cli --all-targets --locked",
+    "test": "cargo nextest run -p cli --locked"
+  }
+}

@@ -1,0 +1,11 @@
+@AGENTS.md
+@docs/agents/project.md
+@docs/agents/index.md
+
+## Claude Code
+
+- Subagents: `Explore` (haiku, search and read), `implementer` (sonnet, one task, test first),
+  `reviewer` (opus, read-only), `ci-fixer` (sonnet, red CI). Keep reports ≤ 15 lines.
+- Skills: `verify`, `add-piece`. `/loop` runs `.claude/loop.md`.
+- Hooks: `guard.mjs` denies publish, force and tag pushes and secret reads, and asks before editing
+  template-owned files; `stop-checks.sh` is opt-in (`HULL_STOP_CHECKS=1`).
