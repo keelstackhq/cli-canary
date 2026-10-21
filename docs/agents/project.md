@@ -35,3 +35,5 @@ are closed after green and never merged, so `main` stays equal to the rendered t
 - Repo settings (admin on keelstackhq/cli-canary): protect `main`, require only the `ci-ok`
   status check; Settings -> Actions -> General: allow actions, workflow permissions "Read
   repository contents".
+
+<!-- canary: docs-only change to measure CI -->
